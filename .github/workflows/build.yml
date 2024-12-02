@@ -33,7 +33,7 @@ jobs:
           $Env:HIP_PATH = "$ROCm_PATH\$(Get-ChildItem -Path $ROCm_PATH -Name)"
           $Env:PATH = "$Env:HIP_PATH\bin;$Env:PATH"
           $Env:HIP_PATH = "$Env:HIP_PATH\"
-          cargo build --release
+          cargo xtask -r --rocm5
 
   build_win_6:
     name: Build (Windows)
@@ -56,4 +56,4 @@ jobs:
           $Env:HIP_PATH = "$ROCm_PATH\$(Get-ChildItem -Path $ROCm_PATH -Name)"
           $Env:PATH = "$Env:HIP_PATH\bin;$Env:PATH"
           $Env:HIP_PATH = "$Env:HIP_PATH\"
-          cargo build --release
+          cargo xtask -r
