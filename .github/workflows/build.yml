@@ -33,7 +33,7 @@ jobs:
           $Env:HIP_PATH = "$ROCm_PATH\$(Get-ChildItem -Path $ROCm_PATH -Name)"
           $Env:PATH = "$Env:HIP_PATH\bin;$Env:PATH"
           $Env:HIP_PATH = "$Env:HIP_PATH\"
-          cargo xtask -r --rocm5
+          cargo build --release
 
   build_win_6:
     name: Build (Windows)
@@ -52,8 +52,10 @@ jobs:
       - uses: Swatinem/rust-cache@v2
       - name: Build for ROCm 6.x
         run: |
-          $ROCm_PATH = "C:\Program Files\AMD\ROCm"
-          $Env:HIP_PATH = "$ROCm_PATH\$(Get-ChildItem -Path $ROCm_PATH -Name)"
-          $Env:PATH = "$Env:HIP_PATH\bin;$Env:PATH"
-          $Env:HIP_PATH = "$Env:HIP_PATH\"
-          cargo xtask -r
+          $Env:ROCm_PATH = "C:\Program Files\AMD\ROCm\6.1"
+          $Env:HIP_PATH = "C:\Program Files\AMD\ROCm\6.1"
+          $Env:PATH = "C:\Program Files\AMD\ROCm\6.1\bin;$Env:PATH"
+          echo "ROCM_PATH=C:\Program Files\AMD\ROCm\6.1" >> $GITHUB_ENV
+          echo "HIP_PATH=C:\Program Files\AMD\ROCm\6.1" >> $GITHUB_ENV
+          echo "PATH=C:\Program Files\AMD\ROCm\6.1\bin;$Env:PATH" >> $GITHUB_ENV
+          cargo build --release
